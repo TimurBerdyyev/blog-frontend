@@ -93,12 +93,12 @@
                               <ul class="thumb-info">
                                   <li><a href="#"><i class="ti-user"></i>{{ post.author }}</a></li>
                                   <li><a href="#"><i class="ti-notepad"></i>{{ post.published_at|date:"F d, Y" }}</a></li>
-                                  <li><a href="#"><i class="ti-themify-favicon"></i>{{ post.comments_amount }} Comments</a></li>
+                                  <li><a href="#"><i class="ti-themify-favicon"></i>{{ post.comments }} Comments</a></li>
                               </ul>
                           </div>
                           <div class="details mt-20">
                               <h3><a href="{{ post.slug }}">{{ post.title }}</a></h3>
-                              <p>{{ post.text|linebreaks }}</p>
+                              <p>{{ post.text|truncatewords:30 }}</p>
                               <a class="button" href="{{ post.slug }}">Read More <i class="ti-arrow-right"></i></a>
                           </div>
                       </div>
@@ -107,10 +107,15 @@
               </div>
           </div>
       </section>
-          <section>
-            <div>
-              <div>
-                  <div class="row">
+
+
+
+
+
+
+
+
+      <div class="row">
                             <div class="col-lg-12">
                                 <nav class="blog-pagination justify-content-center d-flex">
                                     <ul class="pagination">
