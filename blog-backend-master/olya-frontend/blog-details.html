@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Remake Barber - Blog Details</title>
+    <title>{{ post.title }}</title>
     <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'styles.min.css' %}">
   </head>
@@ -17,7 +17,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container box_1620">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <a class="navbar-brand logo_h" href="{% static 'index.html' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
+            <a class="navbar-brand logo_h" href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -26,8 +26,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
               <ul class="nav navbar-nav menu_nav justify-content-center">
-                <li class="nav-item"><a class="nav-link" href="{% static 'index.html' %}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% static 'contact.html' %}">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right navbar-social">
                 <li><a href="#"><i class="ti-facebook"></i></a></li>
@@ -47,11 +47,11 @@
       <div class="container">
         <div class="hero-banner hero-banner--sm">
           <div class="hero-banner__content">
-            <h1>Blog details</h1>
+            <h1>{{ post.title }}</h1>
             <nav aria-label="breadcrumb" class="banner-breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% static 'index.html' %}">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
+                <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
               </ol>
             </nav>
           </div>
@@ -66,24 +66,22 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="main_blog_details">
-              <img class="img-fluid" src="{% static 'img/blog/blog4.png' %}" alt="">
-              <h4>Cartridge Is Better Than Ever <br /> A Discount Toner</h4>
+              <img class="img-fluid" src="{{ post.image_url }}" alt="">
+              <h4>{{ post.title }}</h4>
               <div class="user_details">
                 <div class="mt-sm-0 mt-3">
                   <div class="media">
                     <div class="media-body">
-                      <h5>Mark wiens</h5>
-                      <p>12 Dec, 2017 11:21 am</p>
+                      <h5>{{ post.author }}</h5>
+                      <p>{{ post.published_at|date:"F d, Y H:i a" }}</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc scelerisque ut erat ut auctor. Praesent bibendum justo ante, sed sodales massa eleifend non. Duis elit felis, rutrum id nulla et, tristique consectetur ipsum. Aenean eu purus faucibus, vestibulum urna volutpat, facilisis libero. Phasellus scelerisque risus nunc, vitae fringilla lacus molestie sit amet. Nunc a urna vel dui varius commodo quis nec neque. Aliquam id ipsum mauris. Etiam quis sodales est.
-              <!-- Ваш текст продолжается -->
-              </p>
+              <p>{{ post.text }}</p>
               <div class="news_d_footer flex-column flex-sm-row">
-                <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>Lily and 4 people like this</a>
-                <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>03 Comments</a>
+                <a href="#"><span class="align-middle mr-2"><i class="ti-heart"></i></span>{{ post.likes_amount }} people like this</a>
+                <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><span class="align-middle mr-2"><i class="ti-themify-favicon"></i></span>{{ post.comments|length }} Comments</a>
                 <div class="news_socail ml-sm-auto mt-sm-0 mt-2">
                   <a href="#"><i class="fab fa-facebook-f"></i></a>
                   <a href="#"><i class="fab fa-twitter"></i></a>
@@ -94,14 +92,15 @@
             </div>
 
             <div class="comments-area">
-              <h4>03 Comments</h4>
+              <h4>{{ post.comments|length }} Comments</h4>
+              {% for comment in post.comments %}
               <div class="comment-list">
                 <div class="single-comment justify-content-between d-flex">
                   <div class="user justify-content-between d-flex">
                     <div class="desc">
-                      <h5><a href="#">Emilly Blunt</a></h5>
-                      <p class="date">December 4, 2017 at 3:12 pm</p>
-                      <p class="comment">Never say goodbye till the end comes!</p>
+                      <h5><a href="#">{{ comment.author }}</a></h5>
+                      <p class="date">{{ comment.published_at|date:"F d, Y H:i a" }}</p>
+                      <p class="comment">{{ comment.text }}</p>
                     </div>
                   </div>
                   <div class="reply-btn">
@@ -109,7 +108,7 @@
                   </div>
                 </div>
               </div>
-              <!-- Повторите блоки для других комментариев -->
+              {% endfor %}
             </div>
           </div>
 
