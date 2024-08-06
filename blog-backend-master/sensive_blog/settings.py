@@ -40,7 +40,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sensive_blog.urls'
 
-TEMPLATE_DIR = os.path.join(BASE_DIR, 'olya-frontend')  # Путь к папке с шаблонами
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'olya-frontend')
 
 TEMPLATES = [
     {
@@ -94,7 +94,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Добавьте путь к вашей папке со статическими файлами
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'olya-frontend'),
 ]
