@@ -1,0 +1,22 @@
+<script src="https://api-maps.yandex.ru/2.1/?lang=en_RU&apikey={{YANDEX_MAPS_KEY}}" type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(init);
+        function init() {
+            var location = [55.76, 37.64];
+            var map = new ymaps.Map("map", {
+                center: location,
+                zoom: 10
+            });
+
+            var placemark = new ymaps.Placemark(location, {
+                hintContent: 'Здесь!',
+                balloonContent: 'Это метка на карте'
+            });
+
+            map.geoObjects.add(placemark);
+        }
+    </script>
+
+<body>
+    <div id="map" style="height: 400px; width: 100%;"></div>
+</body>
